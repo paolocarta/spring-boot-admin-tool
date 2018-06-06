@@ -3,7 +3,7 @@ pipeline {
       label "jenkins-maven"
     }
     environment {
-      ORG               = 'interdiscount-coop'
+      ORG               = 'id-microservice'
       APP_NAME          = 'showcase-admin-tool'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }

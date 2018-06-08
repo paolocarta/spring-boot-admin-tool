@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: 10.55.251.99:5000/id-microservice/showcase-admin-tool
+  tag: 0.0.7
   pullPolicy: IfNotPresent
 service:
   name: showcase-admin-tool

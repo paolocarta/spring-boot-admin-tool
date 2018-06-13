@@ -16,15 +16,16 @@
 
 package ch.interdiscount.showcaseadmintool.config;
 
-import com.netflix.discovery.EurekaClient;
-import de.codecentric.boot.admin.server.cloud.discovery.DefaultServiceInstanceConverter;
-import de.codecentric.boot.admin.server.cloud.discovery.EurekaServiceInstanceConverter;
-import de.codecentric.boot.admin.server.cloud.discovery.InstanceDiscoveryListener;
-import de.codecentric.boot.admin.server.cloud.discovery.ServiceInstanceConverter;
+
+import ch.interdiscount.showcaseadmintool.discovery.DefaultServiceInstanceConverter;
+import ch.interdiscount.showcaseadmintool.discovery.KubernetesServiceInstanceConverter;
+import ch.interdiscount.showcaseadmintool.discovery.InstanceDiscoveryListener;
+import ch.interdiscount.showcaseadmintool.discovery.ServiceInstanceConverter;
 import de.codecentric.boot.admin.server.config.AdminServerAutoConfiguration;
 import de.codecentric.boot.admin.server.config.AdminServerMarkerConfiguration;
 import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.services.InstanceRegistry;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -40,7 +41,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnBean(AdminServerMarkerConfiguration.Marker.class)
 @ConditionalOnProperty(prefix = "spring.boot.admin.discovery", name = "enabled", matchIfMissing = true)
 @AutoConfigureAfter(value = AdminServerAutoConfiguration.class, name = {
-    "org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration",
+    "org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClientAutoConfiguration",
     "org.springframework.cloud.client.discovery.simple.SimpleDiscoveryClientAutoConfiguration"})
 public class AdminServerDiscoveryAutoConfiguration {
 
@@ -58,12 +59,12 @@ public class AdminServerDiscoveryAutoConfiguration {
 
     @Configuration
     @ConditionalOnMissingBean({ServiceInstanceConverter.class})
-    @ConditionalOnBean(EurekaClient.class)
+    @ConditionalOnBean(KubernetesClient.class)
     public static class EurekaConverterConfiguration {
         @Bean
         @ConfigurationProperties(prefix = "spring.boot.admin.discovery.converter")
-        public EurekaServiceInstanceConverter serviceInstanceConverter() {
-            return new EurekaServiceInstanceConverter();
+        public KubernetesServiceInstanceConverter serviceInstanceConverter() {
+            return new KubernetesServiceInstanceConverter();
         }
     }
 

@@ -18,23 +18,18 @@ package ch.interdiscount.showcaseadmintool.discovery;
 
 import java.net.URI;
 
-
 import de.codecentric.boot.admin.server.domain.entities.Instance;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.kubernetes.discovery.KubernetesServiceInstance;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
-/**
- * Converts {@link KubernetesServiceInstance}s to {@link Instance}s
- *
- * @author Johannes Edmeier
- */
-public class EurekaServiceInstanceConverter extends DefaultServiceInstanceConverter {
+
+public class KubernetesServiceInstanceConverter extends DefaultServiceInstanceConverter {
 
     @Override
     protected URI getHealthUrl(ServiceInstance instance) {
-        Assert.isInstanceOf(KubernetesServiceInstance.class, instance,
+        Assert.isInstanceOf(KubernetesServiceInstance.class,
+                            instance,
                             "serviceInstance must be of type KubernetesServiceInstance");
         return ((KubernetesServiceInstance) instance).getUri();
     }

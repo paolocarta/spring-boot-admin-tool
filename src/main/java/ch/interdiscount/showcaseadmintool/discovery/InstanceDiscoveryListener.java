@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package de.codecentric.boot.admin.server.cloud.discovery;
+package ch.interdiscount.showcaseadmintool.discovery;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import de.codecentric.boot.admin.server.domain.entities.Instance;
 import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.values.InstanceId;
 import de.codecentric.boot.admin.server.domain.values.Registration;
 import de.codecentric.boot.admin.server.services.InstanceRegistry;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -39,12 +37,10 @@ import org.springframework.cloud.client.discovery.event.InstanceRegisteredEvent;
 import org.springframework.cloud.client.discovery.event.ParentHeartbeatEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.util.PatternMatchUtils;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-/**
- * Listener for Heartbeats events to publish all services to the instance registry.
- *
- * @author Johannes Edmeier
- */
+
 public class InstanceDiscoveryListener {
     private static final Logger log = LoggerFactory.getLogger(InstanceDiscoveryListener.class);
     private static final String SOURCE = "discovery";

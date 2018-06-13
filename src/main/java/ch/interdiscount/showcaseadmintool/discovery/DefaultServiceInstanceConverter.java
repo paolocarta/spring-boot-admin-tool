@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package de.codecentric.boot.admin.server.cloud.discovery;
-
-import de.codecentric.boot.admin.server.domain.entities.Instance;
-import de.codecentric.boot.admin.server.domain.values.Registration;
+package ch.interdiscount.showcaseadmintool.discovery;
 
 import java.net.URI;
 import java.util.Map;
+
+import de.codecentric.boot.admin.server.domain.entities.Instance;
+import de.codecentric.boot.admin.server.domain.values.Registration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
@@ -28,15 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
-/**
- * Converts any {@link ServiceInstance}s to {@link Instance}s. To customize the health- or
- * management-url for all instances you can set healthEndpointPath or managementContextPath
- * respectively. If you want to influence the url per service you can add
- * <code>management.context-path</code> or <code>management.port</code> or <code>health.path</code>
- * to the instances metadata.
- *
- * @author Johannes Edmeier
- */
 public class DefaultServiceInstanceConverter implements ServiceInstanceConverter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultServiceInstanceConverter.class);
     private static final String KEY_MANAGEMENT_PORT = "management.port";

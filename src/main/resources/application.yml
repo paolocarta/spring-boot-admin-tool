@@ -1,5 +1,6 @@
 spring:
-  application.name:gateway
+  application:
+    name: showcase-admin-tool
     cloud:
       gateway:
         discovery:
